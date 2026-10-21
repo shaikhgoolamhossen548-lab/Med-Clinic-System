@@ -1,0 +1,1349 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package assignment2;
+
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
+/**
+ *
+ * @author Admin
+ */
+public class MedClinicApp extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MedClinicApp.class.getName());
+private LinkedList<Patient> patientList = new LinkedList<>();
+    private LinkedList<Doctor> doctorList = new LinkedList<>();
+    private LinkedList<Consultation> consultationList = new LinkedList<>();
+    
+    
+    
+    
+    
+    
+     private DefaultTableModel patientTableModel;
+
+
+
+    
+    /**
+     * Creates new form MedClinicApp
+     */
+    public MedClinicApp() {
+        initComponents();
+        initializeTable();
+        refreshTable(); 
+    }
+        private void initializeTable() {
+        // Get the model from your existing patientTable
+        DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+        
+        // Clear existing columns if any
+        model.setRowCount(0);
+        
+        // Set column headers
+        model.setColumnIdentifiers(new Object[]{
+            "Patient NIC", "Last Name", "First Name", "Date Of Birth", "Gender", "Home Address", "Contact Number"
+        });
+        
+         // Initialize Doctor Table
+        DefaultTableModel doctorModel = (DefaultTableModel) doctorTable.getModel();
+        doctorModel.setRowCount(0);
+        doctorModel.setColumnIdentifiers(new Object[]{
+            "Doctor ID", "Last Name", "First Name", "Specialization", "Contact Number", "Home Address"
+        });
+        
+         // Initialize Consultation Table
+        DefaultTableModel consultationModel = (DefaultTableModel) consultationTable.getModel();
+        consultationModel.setRowCount(0);
+        consultationModel.setColumnIdentifiers(new Object[]{
+            "Consultation ID", "Date Consultation", "Doctor ID", "Patient NIC", "Remarks"
+        });
+        
+        
+    }
+        
+        // ==================== REFRESH COMBO BOXES ====================
+  private void refreshComboBoxes() {
+        // Refresh Patient ComboBox - Auto-filled with all Patient NICs
+        jCombopatient.removeAllItems();
+        if (patientList.isEmpty()) {
+            jCombopatient.addItem("No Patients Available");
+        } else {
+            for (Patient p : patientList) {
+                jCombopatient.addItem(p.getNic());
+            }
+        }
+        
+        // Refresh Doctor ComboBox - Auto-filled with all Doctor IDs
+        jCombodoctor.removeAllItems();
+        if (doctorList.isEmpty()) {
+            jCombodoctor.addItem("No Doctors Available");
+        } else {
+            for (Doctor d : doctorList) {
+                jCombodoctor.addItem(String.valueOf(d.getId()));
+            }
+        }
+    } 
+    
+    // ==================== REFRESH TABLE ====================
+    private void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+        model.setRowCount(0); // Clear all rows
+        
+        for (Patient p : patientList) {
+            model.addRow(new Object[]{
+                p.getNic(),
+                p.getLastName(),
+                p.getFirstName(),
+                p.getDateOfBirth(),
+                p.getGender(),
+                p.getHomeAddress(),
+                p.getContactNumber()
+            });
+        }
+    }
+    
+    
+      private void refreshDoctorTable() {
+        DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+        model.setRowCount(0);
+        for (Doctor d : doctorList) {
+            model.addRow(new Object[]{
+                d.getId(),
+                d.getLastName(),
+                d.getFirstName(),
+                d.getSpecialization(),
+                d.getContactNumber(),
+                d.getHomeAddress()
+            });
+        }
+    }
+      
+      
+        private void refreshConsultationTable() {
+        DefaultTableModel model = (DefaultTableModel) consultationTable.getModel();
+        model.setRowCount(0);
+        for (Consultation c : consultationList) {
+            model.addRow(new Object[]{
+                c.getId(),
+                c.getDate(),
+                c.getDoctor().getId(),
+                c.getPatient().getNic(),
+                c.getRemark()
+            });
+        }
+    }
+      
+      
+      
+         private void refreshAll() {
+        refreshTable();
+        refreshDoctorTable();
+        refreshConsultationTable();
+        refreshComboBoxes();
+    }
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        patientTable = new javax.swing.JTable();
+        addPatient = new javax.swing.JButton();
+        updatepatient = new javax.swing.JButton();
+        deletepatient = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        searchpatient = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        viewallpatient = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        doctorTable = new javax.swing.JTable();
+        adddoc = new javax.swing.JButton();
+        updatedoc = new javax.swing.JButton();
+        deletedoc = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        searchdoc = new javax.swing.JButton();
+        viewdoc = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jCombopatient = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jCombodoctor = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        createcon = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        consultationTable = new javax.swing.JTable();
+        searchcon = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        viewcon = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\noun-doctor-8444925 (1).png")); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\noun-consultation-8355337 (1).png")); // NOI18N
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\noun-search-8446468 (1).png")); // NOI18N
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\noun-patient-5373271 (1).png")); // NOI18N
+        jLabel6.setText("jLabel6");
+
+        jLabel4.setFont(new java.awt.Font("Courier New", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel4.setText("Med Clinic Application");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+
+        patientTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Patient NIC", "Last Name", "First Name", "Date Of Birth", "Gender", "Home Address", "Contact Number"
+            }
+        ));
+        jScrollPane1.setViewportView(patientTable);
+
+        addPatient.setText("Add");
+        addPatient.addActionListener(this::addPatientActionPerformed);
+
+        updatepatient.setText("Update");
+        updatepatient.addActionListener(this::updatepatientActionPerformed);
+
+        deletepatient.setText("Delete");
+        deletepatient.addActionListener(this::deletepatientActionPerformed);
+
+        jLabel9.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel9.setText("Patient Registration:");
+
+        searchpatient.setText("Search");
+        searchpatient.addActionListener(this::searchpatientActionPerformed);
+
+        viewallpatient.setText("View All");
+        viewallpatient.addActionListener(this::viewallpatientActionPerformed);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(addPatient)
+                        .addGap(83, 83, 83)
+                        .addComponent(updatepatient)
+                        .addGap(84, 84, 84)
+                        .addComponent(deletepatient)
+                        .addGap(53, 53, 53)
+                        .addComponent(searchpatient)
+                        .addContainerGap(101, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(296, 296, 296)
+                .addComponent(viewallpatient)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addPatient, deletepatient, updatepatient});
+
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deletepatient)
+                    .addComponent(searchpatient)
+                    .addComponent(addPatient)
+                    .addComponent(updatepatient))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewallpatient)
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Patient", jPanel3);
+
+        doctorTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Doctor ID", "Last Name", "First Name", "Specialization", "Conatct Number", "Home Address"
+            }
+        ));
+        jScrollPane2.setViewportView(doctorTable);
+
+        adddoc.setText("Add");
+        adddoc.addActionListener(this::adddocActionPerformed);
+
+        updatedoc.setText("Update");
+        updatedoc.addActionListener(this::updatedocActionPerformed);
+
+        deletedoc.setText("Delete");
+        deletedoc.addActionListener(this::deletedocActionPerformed);
+
+        jLabel12.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel12.setText("Doctor Registration:");
+
+        searchdoc.setText("Search");
+        searchdoc.addActionListener(this::searchdocActionPerformed);
+
+        viewdoc.setText("View Doctor");
+        viewdoc.addActionListener(this::viewdocActionPerformed);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(adddoc)
+                .addGap(108, 108, 108)
+                .addComponent(updatedoc)
+                .addGap(109, 109, 109)
+                .addComponent(deletedoc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(searchdoc)
+                .addGap(67, 67, 67))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(viewdoc)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(deletedoc)
+                        .addComponent(searchdoc))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(adddoc)
+                        .addComponent(updatedoc)))
+                .addGap(23, 23, 23)
+                .addComponent(viewdoc)
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Doctor", jPanel4);
+
+        jCombopatient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCombopatient.addActionListener(this::jCombopatientActionPerformed);
+
+        jLabel1.setText("Select Patient Form the List");
+
+        jLabel7.setText("Select Doctor from List");
+
+        jCombodoctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel8.setText("Click on button to create Connsultation:");
+
+        createcon.setText("Create");
+        createcon.addActionListener(this::createconActionPerformed);
+
+        consultationTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Consultation ID", "Date Consultation", "Doctor ID", "Patient ID", "Remark"
+            }
+        ));
+        jScrollPane3.setViewportView(consultationTable);
+
+        searchcon.setText("Search");
+        searchcon.addActionListener(this::searchconActionPerformed);
+
+        jLabel10.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel10.setText("Consultation Registration:");
+
+        viewcon.setText("View All");
+        viewcon.addActionListener(this::viewconActionPerformed);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(createcon)
+                                .addGap(87, 87, 87)
+                                .addComponent(viewcon)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCombopatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCombodoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(searchcon)
+                        .addGap(34, 34, 34))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jCombopatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jCombodoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchcon))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(createcon)
+                    .addComponent(viewcon))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+
+        jTabbedPane1.addTab("Consultation", jPanel5);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jCombopatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombopatientActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCombopatientActionPerformed
+
+    private void addPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientActionPerformed
+        // add button for patient
+        try {
+            //put the NIC
+            String nic = JOptionPane.showInputDialog(this, "Enter Patient NIC:", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (nic == null || nic.trim().isEmpty()) return;
+            nic = nic.trim();
+            
+            for (Patient p : patientList) {
+                if (p.getNic().equalsIgnoreCase(nic)) {
+                    JOptionPane.showMessageDialog(this, "Patient NIC already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            //for the last name
+            String lastName = JOptionPane.showInputDialog(this, "Enter Last Name:", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (lastName == null || lastName.trim().isEmpty()) return;
+            lastName = lastName.trim();
+            
+              //for the first name
+            String firstName = JOptionPane.showInputDialog(this, "Enter First Name:", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (firstName == null || firstName.trim().isEmpty()) return;
+            firstName = firstName.trim();
+            
+            //DOB input 
+            String dob = JOptionPane.showInputDialog(this, "Enter Date of Birth (YYYY-MM-DD):", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (dob == null || dob.trim().isEmpty()) return;
+            dob = dob.trim();
+            
+            //check if it is M or F or Other 
+            String[] genderOptions = {"Male", "Female", "Other"};
+            String gender = (String) JOptionPane.showInputDialog(this, "Select Gender:", "Add Patient", 
+                JOptionPane.QUESTION_MESSAGE, null, genderOptions, genderOptions[0]);
+            if (gender == null) return;
+            
+            // address Input 
+            String address = JOptionPane.showInputDialog(this, "Enter Home Address:", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (address == null || address.trim().isEmpty()) return;
+            address = address.trim();
+            
+            //Contact number 
+            String contact = JOptionPane.showInputDialog(this, "Enter Contact Number:", "Add Patient", JOptionPane.QUESTION_MESSAGE);
+            if (contact == null || contact.trim().isEmpty()) return;
+            contact = contact.trim();
+            
+            Patient newPatient = new Patient(nic, lastName, firstName, dob, gender, address, contact);
+            patientList.add(newPatient);
+            refreshAll();
+            
+            //show Successfully  
+            JOptionPane.showMessageDialog(this, "Patient added successfully!\nNIC: " + nic, "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+            //show Error message 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        
+        
+        
+        
+    }//GEN-LAST:event_addPatientActionPerformed
+
+    private void updatepatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatepatientActionPerformed
+        // update button for patient select from the table name patientTable
+        int selectedRow = patientTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a patient from the table to update.", 
+                "Selection Required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+            String nic = model.getValueAt(selectedRow, 0).toString();
+            //find the patient
+            Patient patientToUpdate = null;
+            for (Patient p : patientList) {
+                if (p.getNic().equalsIgnoreCase(nic)) {
+                    patientToUpdate = p;
+                    break;
+                }
+            }
+            
+            if (patientToUpdate == null) {
+                JOptionPane.showMessageDialog(this, "Patient not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            //user select from the table 
+            String[] columnOptions = {"NIC", "Last Name", "First Name", "Date of Birth", "Gender", "Home Address", "Contact Number"};
+            
+            String currentDetails = 
+                "Current Details:\n" +
+                "1. NIC: " + patientToUpdate.getNic() + "\n" +
+                "2. Last Name: " + patientToUpdate.getLastName() + "\n" +
+                "3. First Name: " + patientToUpdate.getFirstName() + "\n" +
+                "4. Date of Birth: " + patientToUpdate.getDateOfBirth() + "\n" +
+                "5. Gender: " + patientToUpdate.getGender() + "\n" +
+                "6. Home Address: " + patientToUpdate.getHomeAddress() + "\n" +
+                "7. Contact Number: " + patientToUpdate.getContactNumber() + "\n\n" +
+                "Select which field to update:";
+            
+            String selectedColumn = (String) JOptionPane.showInputDialog(this, 
+                currentDetails, "Select Field to Update", JOptionPane.QUESTION_MESSAGE, 
+                null, columnOptions, columnOptions[0]);
+            
+            if (selectedColumn == null) return;
+            //user select which filed they want to update 
+            switch (selectedColumn) {
+                case "NIC":
+                    String newNic = JOptionPane.showInputDialog(this, "Enter New NIC (Current: " + patientToUpdate.getNic() + "):", 
+                        "Update NIC", JOptionPane.QUESTION_MESSAGE);
+                    if (newNic == null || newNic.trim().isEmpty()) return;
+                    newNic = newNic.trim();
+                    for (Patient p : patientList) {
+                        if (p.getNic().equalsIgnoreCase(newNic) && !p.getNic().equalsIgnoreCase(nic)) {
+                            JOptionPane.showMessageDialog(this, "NIC already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                    patientToUpdate.setNic(newNic);
+                    break;
+                case "Last Name":
+                    String newLastName = JOptionPane.showInputDialog(this, "Enter New Last Name (Current: " + patientToUpdate.getLastName() + "):", 
+                        "Update Last Name", JOptionPane.QUESTION_MESSAGE);
+                    if (newLastName == null || newLastName.trim().isEmpty()) return;
+                    patientToUpdate.setLastName(newLastName.trim());
+                    break;
+                case "First Name":
+                    String newFirstName = JOptionPane.showInputDialog(this, "Enter New First Name (Current: " + patientToUpdate.getFirstName() + "):", 
+                        "Update First Name", JOptionPane.QUESTION_MESSAGE);
+                    if (newFirstName == null || newFirstName.trim().isEmpty()) return;
+                    patientToUpdate.setFirstName(newFirstName.trim());
+                    break;
+                case "Date of Birth":
+                    String newDob = JOptionPane.showInputDialog(this, "Enter New Date of Birth (Current: " + patientToUpdate.getDateOfBirth() + "):", 
+                        "Update DOB", JOptionPane.QUESTION_MESSAGE);
+                    if (newDob == null || newDob.trim().isEmpty()) return;
+                    patientToUpdate.setDateOfBirth(newDob.trim());
+                    break;
+                case "Gender":
+                    String[] genderOptions = {"Male", "Female", "Other"};
+                    String newGender = (String) JOptionPane.showInputDialog(this, "Select New Gender (Current: " + patientToUpdate.getGender() + "):", 
+                        "Update Gender", JOptionPane.QUESTION_MESSAGE, null, genderOptions, patientToUpdate.getGender());
+                    if (newGender == null) return;
+                    patientToUpdate.setGender(newGender);
+                    break;
+                case "Home Address":
+                    String newAddress = JOptionPane.showInputDialog(this, "Enter New Address (Current: " + patientToUpdate.getHomeAddress() + "):", 
+                        "Update Address", JOptionPane.QUESTION_MESSAGE);
+                    if (newAddress == null || newAddress.trim().isEmpty()) return;
+                    patientToUpdate.setHomeAddress(newAddress.trim());
+                    break;
+                case "Contact Number":
+                    String newContact = JOptionPane.showInputDialog(this, "Enter New Contact (Current: " + patientToUpdate.getContactNumber() + "):", 
+                        "Update Contact", JOptionPane.QUESTION_MESSAGE);
+                    if (newContact == null || newContact.trim().isEmpty()) return;
+                    patientToUpdate.setContactNumber(newContact.trim());
+                    break;
+            }
+            //display a messgae 
+            refreshAll();
+            JOptionPane.showMessageDialog(this, "Patient updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            //if error happaned during a update 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+    }//GEN-LAST:event_updatepatientActionPerformed
+
+    private void deletepatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletepatientActionPerformed
+        // selct from the table to delete 
+          int selectedRow = patientTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a patient from the table to delete.", 
+                "Selection Required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        //select from the table 
+        try {
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+            String nic = model.getValueAt(selectedRow, 0).toString();
+            String fullName = model.getValueAt(selectedRow, 1) + " " + model.getValueAt(selectedRow, 2);
+            //confirm message you want to delete this record 
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to delete this patient?\n\nNIC: " + nic + "\nName: " + fullName + "\n\nThis action cannot be undone!", 
+                "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (confirm != JOptionPane.YES_OPTION) return;
+            
+            patientList.removeIf(p -> p.getNic().equalsIgnoreCase(nic));
+            refreshAll();
+            //successfully message for the deletion
+            JOptionPane.showMessageDialog(this, "Patient deleted successfully!\nNIC: " + nic, "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+     
+        
+        
+    }//GEN-LAST:event_deletepatientActionPerformed
+
+    private void searchpatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchpatientActionPerformed
+        // JOptionPanel to serach by NIC then display information
+           try {
+            String nic = JOptionPane.showInputDialog(this, "Enter Patient NIC to search:", "Search Patient", JOptionPane.QUESTION_MESSAGE);
+            if (nic == null || nic.trim().isEmpty()) {
+                refreshTable();
+                return;
+            }
+            nic = nic.trim();
+            Patient foundPatient = null;
+            for (Patient p : patientList) {
+                if (p.getNic().equalsIgnoreCase(nic)) {
+                    foundPatient = p;
+                    break;
+                }
+            }
+            if (foundPatient == null) {
+                JOptionPane.showMessageDialog(this, "No patient found with NIC: " + nic, "Not Found", JOptionPane.INFORMATION_MESSAGE);
+                refreshTable();
+                return;
+            }
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+            model.setRowCount(0);
+            model.addRow(new Object[]{
+                foundPatient.getNic(),
+                foundPatient.getLastName(),
+                foundPatient.getFirstName(),
+                foundPatient.getDateOfBirth(),
+                foundPatient.getGender(),
+                foundPatient.getHomeAddress(),
+                foundPatient.getContactNumber()
+            });
+            patientTable.setRowSelectionInterval(0, 0);
+            
+            JOptionPane.showMessageDialog(this, 
+                "Patient found!\n\nNIC: " + foundPatient.getNic() + "\nName: " + foundPatient.getFullName() + 
+                "\nContact: " + foundPatient.getContactNumber(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        
+    }//GEN-LAST:event_searchpatientActionPerformed
+
+    private void viewallpatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewallpatientActionPerformed
+        // view all the record on the table patientTable
+          refreshTable();
+        JOptionPane.showMessageDialog(this, "Total Patients: " + patientList.size(), "All Records", JOptionPane.INFORMATION_MESSAGE);
+    
+    
+        
+        
+        
+    }//GEN-LAST:event_viewallpatientActionPerformed
+
+    private void adddocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adddocActionPerformed
+        // to add the doctor 
+          try {
+            String idStr = JOptionPane.showInputDialog(this, "Enter Doctor ID (Number):", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (idStr == null || idStr.trim().isEmpty()) return;
+            
+            int id;
+            //check if the id is in number 
+            try {
+                id = Integer.parseInt(idStr.trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid ID! Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            //check is that id already has in the system 
+            for (Doctor d : doctorList) {
+                if (d.getId() == id) {
+                    JOptionPane.showMessageDialog(this, "Doctor ID already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            //enter the L.name
+            String lastName = JOptionPane.showInputDialog(this, "Enter Last Name:", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (lastName == null || lastName.trim().isEmpty()) return;
+            lastName = lastName.trim();
+            //enter the F.name
+            String firstName = JOptionPane.showInputDialog(this, "Enter First Name:", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (firstName == null || firstName.trim().isEmpty()) return;
+            firstName = firstName.trim();
+            //enter the specilization
+            String specialization = JOptionPane.showInputDialog(this, "Enter Specialization:", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (specialization == null || specialization.trim().isEmpty()) return;
+            specialization = specialization.trim();
+            //enter the contact
+            String contact = JOptionPane.showInputDialog(this, "Enter Contact Number:", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (contact == null || contact.trim().isEmpty()) return;
+            contact = contact.trim();
+            //enter the address
+            String address = JOptionPane.showInputDialog(this, "Enter Home Address:", "Add Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (address == null || address.trim().isEmpty()) return;
+            address = address.trim();
+            //add to link list doctorList
+            Doctor newDoctor = new Doctor(id, lastName, firstName, specialization, contact, address);
+            doctorList.add(newDoctor);
+            refreshAll();
+            //show message
+            JOptionPane.showMessageDialog(this, "Doctor added successfully!\nID: " + id, "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_adddocActionPerformed
+
+    private void updatedocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatedocActionPerformed
+        // To update the record 
+         int selectedRow = doctorTable.getSelectedRow();
+        if (selectedRow == -1) {
+            //ask the user to select which doc you want to update 
+            JOptionPane.showMessageDialog(this, "Please select a doctor from the table to update.", 
+                "Selection Required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            int id = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+            //look for the doc in the doctor list 
+            Doctor doctorToUpdate = null;
+            for (Doctor d : doctorList) {
+                if (d.getId() == id) {
+                    doctorToUpdate = d;
+                    break;
+                }
+            }
+            //if the doctor is not found 
+            if (doctorToUpdate == null) {
+                JOptionPane.showMessageDialog(this, "Doctor not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            //if the enter value macth then output this 
+            String[] columnOptions = {"ID", "Last Name", "First Name", "Specialization", "Contact Number", "Home Address"};
+            //the ouput with the details 
+            String currentDetails = 
+                "Current Details:\n" +
+                "1. ID: " + doctorToUpdate.getId() + "\n" +
+                "2. Last Name: " + doctorToUpdate.getLastName() + "\n" +
+                "3. First Name: " + doctorToUpdate.getFirstName() + "\n" +
+                "4. Specialization: " + doctorToUpdate.getSpecialization() + "\n" +
+                "5. Contact Number: " + doctorToUpdate.getContactNumber() + "\n" +
+                "6. Home Address: " + doctorToUpdate.getHomeAddress() + "\n\n" +
+                "Select which field to update:";
+            //select which field you want to update 
+            String selectedColumn = (String) JOptionPane.showInputDialog(this, 
+                currentDetails, "Select Field to Update", JOptionPane.QUESTION_MESSAGE, 
+                null, columnOptions, columnOptions[0]);
+            
+            if (selectedColumn == null) return;
+            //use switch case here 
+            switch (selectedColumn) {
+                //if they has selected the id to update then a chcek is doing before inserting 
+                case "ID":
+                    String newIdStr = JOptionPane.showInputDialog(this, "Enter New ID (Current: " + doctorToUpdate.getId() + "):", 
+                        "Update ID", JOptionPane.QUESTION_MESSAGE);
+                    if (newIdStr == null || newIdStr.trim().isEmpty()) return;
+                    int newId;
+                    try {
+                        newId = Integer.parseInt(newIdStr.trim());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Invalid ID!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    for (Doctor d : doctorList) {
+                        if (d.getId() == newId && d.getId() != id) {
+                            JOptionPane.showMessageDialog(this, "ID already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                    doctorToUpdate.setId(newId);
+                    break;
+                    //select L.Name
+                case "Last Name":
+                    String newLastName = JOptionPane.showInputDialog(this, "Enter New Last Name (Current: " + doctorToUpdate.getLastName() + "):", 
+                        "Update Last Name", JOptionPane.QUESTION_MESSAGE);
+                    if (newLastName == null || newLastName.trim().isEmpty()) return;
+                    doctorToUpdate.setLastName(newLastName.trim());
+                    break;
+                    //select F.Name
+                case "First Name":
+                    String newFirstName = JOptionPane.showInputDialog(this, "Enter New First Name (Current: " + doctorToUpdate.getFirstName() + "):", 
+                        "Update First Name", JOptionPane.QUESTION_MESSAGE);
+                    if (newFirstName == null || newFirstName.trim().isEmpty()) return;
+                    doctorToUpdate.setFirstName(newFirstName.trim());
+                    break;
+                    //Select Specialization 
+                case "Specialization":
+                    String newSpecialization = JOptionPane.showInputDialog(this, "Enter New Specialization (Current: " + doctorToUpdate.getSpecialization() + "):", 
+                        "Update Specialization", JOptionPane.QUESTION_MESSAGE);
+                    if (newSpecialization == null || newSpecialization.trim().isEmpty()) return;
+                    doctorToUpdate.setSpecialization(newSpecialization.trim());
+                    break;
+                    //select contact Number 
+                case "Contact Number":
+                    String newContact = JOptionPane.showInputDialog(this, "Enter New Contact (Current: " + doctorToUpdate.getContactNumber() + "):", 
+                        "Update Contact", JOptionPane.QUESTION_MESSAGE);
+                    if (newContact == null || newContact.trim().isEmpty()) return;
+                    doctorToUpdate.setContactNumber(newContact.trim());
+                    break;
+                    //select home address
+                case "Home Address":
+                    String newAddress = JOptionPane.showInputDialog(this, "Enter New Address (Current: " + doctorToUpdate.getHomeAddress() + "):", 
+                        "Update Address", JOptionPane.QUESTION_MESSAGE);
+                    if (newAddress == null || newAddress.trim().isEmpty()) return;
+                    doctorToUpdate.setHomeAddress(newAddress.trim());
+                    break;
+            }
+            //reffreach the table with the new update 
+            refreshAll();
+            //display the messsage 
+            JOptionPane.showMessageDialog(this, "Doctor updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_updatedocActionPerformed
+
+    private void deletedocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletedocActionPerformed
+        // To delete a record
+        // using ID to delete a record 
+          int selectedRow = doctorTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a doctor from the table to delete.", 
+                "Selection Required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            int id = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+            String fullName = model.getValueAt(selectedRow, 1) + " " + model.getValueAt(selectedRow, 2);
+            
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to delete this doctor?\n\nID: " + id + "\nName: " + fullName + "\n\nThis action cannot be undone!", 
+                "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (confirm != JOptionPane.YES_OPTION) return;
+            
+            doctorList.removeIf(d -> d.getId() == id);
+            refreshAll();
+            
+            JOptionPane.showMessageDialog(this, "Doctor deleted successfully!\nID: " + id, "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_deletedocActionPerformed
+
+    private void searchdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdocActionPerformed
+        // to search a doctor
+        try {
+            String idStr = JOptionPane.showInputDialog(this, "Enter Doctor ID to search:", "Search Doctor", JOptionPane.QUESTION_MESSAGE);
+            if (idStr == null || idStr.trim().isEmpty()) {
+                refreshDoctorTable();
+                return;
+            }
+            int searchId;
+            try {
+                searchId = Integer.parseInt(idStr.trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid ID!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Doctor foundDoctor = null;
+            for (Doctor d : doctorList) {
+                if (d.getId() == searchId) {
+                    foundDoctor = d;
+                    break;
+                }
+            }
+            if (foundDoctor == null) {
+                JOptionPane.showMessageDialog(this, "No doctor found with ID: " + searchId, "Not Found", JOptionPane.INFORMATION_MESSAGE);
+                refreshDoctorTable();
+                return;
+            }
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            model.setRowCount(0);
+            model.addRow(new Object[]{
+                foundDoctor.getId(),
+                foundDoctor.getLastName(),
+                foundDoctor.getFirstName(),
+                foundDoctor.getSpecialization(),
+                foundDoctor.getContactNumber(),
+                foundDoctor.getHomeAddress()
+            });            
+            doctorTable.setRowSelectionInterval(0, 0);
+            JOptionPane.showMessageDialog(this, 
+                "Doctor found!\n\nID: " + foundDoctor.getId() + "\nName: " + foundDoctor.getFullName() + 
+                "\nSpecialization: " + foundDoctor.getSpecialization(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_searchdocActionPerformed
+
+    private void viewdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewdocActionPerformed
+        // To view al the doctor 
+        
+       refreshDoctorTable();
+        JOptionPane.showMessageDialog(this, "Total Doctors: " + doctorList.size(), "All Records", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_viewdocActionPerformed
+
+    private void searchconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchconActionPerformed
+        // to search by which they want to search 
+      try {
+            String[] searchOptions = {"Consultation ID", "Patient NIC", "Doctor ID", "Date", "Remarks"};
+            
+            String searchBy = (String) JOptionPane.showInputDialog(this, 
+                "Search consultation by:", "Search Consultation", 
+                JOptionPane.QUESTION_MESSAGE, null, searchOptions, searchOptions[0]);
+            
+            if (searchBy == null) return;
+            
+            String searchTerm = JOptionPane.showInputDialog(this, 
+                "Enter " + searchBy + " to search:", "Search Consultation", JOptionPane.QUESTION_MESSAGE);
+            
+            if (searchTerm == null || searchTerm.trim().isEmpty()) {
+                refreshConsultationTable();
+                return;
+            }
+            searchTerm = searchTerm.trim().toLowerCase();
+            
+            DefaultTableModel model = (DefaultTableModel) consultationTable.getModel();
+            model.setRowCount(0);
+            int count = 0;
+            StringBuilder results = new StringBuilder();
+            
+            for (Consultation c : consultationList) {
+                boolean match = false;
+                
+                switch (searchBy) {
+                    case "Consultation ID":
+                        if (String.valueOf(c.getId()).contains(searchTerm)) match = true;
+                        break;
+                    case "Patient NIC":
+                        if (c.getPatient().getNic().toLowerCase().contains(searchTerm)) match = true;
+                        break;
+                    case "Doctor ID":
+                        if (String.valueOf(c.getDoctor().getId()).contains(searchTerm)) match = true;
+                        break;
+                    case "Date":
+                        if (c.getDate().toLowerCase().contains(searchTerm)) match = true;
+                        break;
+                    case "Remarks":
+                        if (c.getRemark() != null && c.getRemark().toLowerCase().contains(searchTerm)) match = true;
+                        break;
+                }
+                
+                if (match) {
+                    model.addRow(new Object[]{
+                        c.getId(),
+                        c.getDate(),
+                        c.getDoctor().getId(),
+                        c.getPatient().getNic(),
+                        c.getRemark()
+                    });
+                    count++;
+                    results.append("ID: ").append(c.getId())
+                          .append(" | Patient: ").append(c.getPatient().getNic())
+                          .append(" | Doctor: ").append(c.getDoctor().getId())
+                          .append(" | Date: ").append(c.getDate()).append("\n");
+                }
+            }
+            
+            if (count == 0) {
+                JOptionPane.showMessageDialog(this, 
+                    "No consultations found matching: " + searchTerm + "\nSearch by: " + searchBy, 
+                    "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                refreshConsultationTable();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Found " + count + " consultation(s):\n\n" + results.toString(), 
+                    "Search Results", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+    }//GEN-LAST:event_searchconActionPerformed
+
+    private void createconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createconActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            // Check if patient is selected
+            if (jCombopatient.getItemCount() == 0 || jCombopatient.getSelectedItem() == null || 
+                jCombopatient.getSelectedItem().toString().equals("No Patients Available")) {
+                JOptionPane.showMessageDialog(this, 
+                    "No patient available! Please add a patient first.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check if doctor is selected
+            if (jCombodoctor.getItemCount() == 0 || jCombodoctor.getSelectedItem() == null ||
+                jCombodoctor.getSelectedItem().toString().equals("No Doctors Available")) {
+                JOptionPane.showMessageDialog(this, 
+                    "No doctor available! Please add a doctor first.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Get selected patient NIC and Doctor ID
+            String patientNic = jCombopatient.getSelectedItem().toString();
+            int doctorId = Integer.parseInt(jCombodoctor.getSelectedItem().toString());
+            
+            // Find patient and doctor objects
+            Patient selectedPatientObj = null;
+            Doctor selectedDoctorObj = null;
+            
+            for (Patient p : patientList) {
+                if (p.getNic().equals(patientNic)) {
+                    selectedPatientObj = p;
+                    break;
+                }
+            }
+            
+            for (Doctor d : doctorList) {
+                if (d.getId() == doctorId) {
+                    selectedDoctorObj = d;
+                    break;
+                }
+            }
+            
+            if (selectedPatientObj == null) {
+                JOptionPane.showMessageDialog(this, "Selected patient not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if (selectedDoctorObj == null) {
+                JOptionPane.showMessageDialog(this, "Selected doctor not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Get Consultation ID
+            String idStr = JOptionPane.showInputDialog(this, "Enter Consultation ID (Number):", 
+                "Create Consultation", JOptionPane.QUESTION_MESSAGE);
+            if (idStr == null || idStr.trim().isEmpty()) return;
+            
+            int id;
+            try {
+                id = Integer.parseInt(idStr.trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid ID! Please enter a number.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check duplicate Consultation ID
+            for (Consultation c : consultationList) {
+                if (c.getId() == id) {
+                    JOptionPane.showMessageDialog(this, "Consultation ID already exists!", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
+            // Get Date
+            String date = JOptionPane.showInputDialog(this, "Enter Date (DD-MM-YYYY):", 
+                "Create Consultation", JOptionPane.QUESTION_MESSAGE);
+            if (date == null || date.trim().isEmpty()) return;
+            date = date.trim();
+            
+            // Get Remark
+            String remark = JOptionPane.showInputDialog(this, "Enter Remarks (Optional):", 
+                "Create Consultation", JOptionPane.QUESTION_MESSAGE);
+            if (remark == null) remark = "";
+            remark = remark.trim();
+            
+            // Create consultation
+            Consultation newConsultation = new Consultation(id, selectedPatientObj, selectedDoctorObj, date, remark);
+            consultationList.add(newConsultation);
+            refreshAll();
+            
+            JOptionPane.showMessageDialog(this, 
+                "Consultation created successfully!\n\n" +
+                "ID: " + id + "\n" +
+                "Patient: " + selectedPatientObj.getFullName() + " (NIC: " + patientNic + ")\n" +
+                "Doctor: " + selectedDoctorObj.getFullName() + " (ID: " + doctorId + ")\n" +
+                "Date: " + date + "\n" +
+                "Remarks: " + remark, 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_createconActionPerformed
+
+    private void viewconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewconActionPerformed
+        // TODO add your handling code here:
+        
+         refreshConsultationTable();
+        JOptionPane.showMessageDialog(this, 
+            "Total Consultations: " + consultationList.size(), 
+            "All Records", 
+            JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_viewconActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new MedClinicApp().setVisible(true));
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addPatient;
+    private javax.swing.JButton adddoc;
+    private javax.swing.JTable consultationTable;
+    private javax.swing.JButton createcon;
+    private javax.swing.JButton deletedoc;
+    private javax.swing.JButton deletepatient;
+    private javax.swing.JTable doctorTable;
+    private javax.swing.JComboBox<String> jCombodoctor;
+    private javax.swing.JComboBox<String> jCombopatient;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable patientTable;
+    private javax.swing.JButton searchcon;
+    private javax.swing.JButton searchdoc;
+    private javax.swing.JButton searchpatient;
+    private javax.swing.JButton updatedoc;
+    private javax.swing.JButton updatepatient;
+    private javax.swing.JButton viewallpatient;
+    private javax.swing.JButton viewcon;
+    private javax.swing.JButton viewdoc;
+    // End of variables declaration//GEN-END:variables
+}
